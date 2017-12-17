@@ -6,7 +6,7 @@ import telebot
 import re
 import json
 import sqlite3
-from urllib import error, request
+from urllib import request
 
 base_dir = os.path.dirname(__file__)
 host = "http://doska.ykt.ru"

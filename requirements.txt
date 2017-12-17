@@ -1,0 +1,4 @@
+## The following requirements were added by pip freeze:
+bs4==0.0.1
+pyTelegramBotAPI==3.5.1
+urllib3==1.22
