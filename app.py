@@ -136,8 +136,8 @@ def pages_parse(page, chatId):
 
 
 # Запуск бота, стараемся не обращать внимания на ошибки
-if __name__ == '__main__':
-    bot.polling(none_stop=True)
+#if __name__ == '__main__':
+    #bot.polling(none_stop=True)
 
     """
     @bot.message_handler(content_types=['text'])
