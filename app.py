@@ -27,10 +27,6 @@ def getConf():
 
 
 bot = telebot.TeleBot(getConf()["token"])
-client_operator_chat = {}
-TEAM_USER_LOGGING = 0
-TEAM_USER_ACCEPTED = 1
-user_step = {}
 
 print(bot.get_me())
 
@@ -61,7 +57,7 @@ def send_welcome(message):
     if not data:
         cur.execute('INSERT INTO users (id, username, firstName, secondName, chatId) VALUES(NULL, "'+str(username)+'", "'+str(first_name)+'", "'+str(last_name)+'", "'+str(chatId)+'")')
         con.commit()
-    bot.send_message(message.chat.id, "Дарова есть че", reply_markup=user_markup)
+    bot.send_message(message.chat.id, "Здравствуйте, я бот парсер обьявлений", reply_markup=user_markup)
 
 
 @bot.message_handler(commands=['send'])
@@ -131,27 +127,9 @@ def pages_parse(page, chatId):
             message.append(postContent)
     if message is not "":
         send_message(message, chatId)
-        cur.execute("UPDATE users SET last_post_id=? WHERE chatId=?", (int(maxim), chatId))
+        cur.execute("UPDATE users SET last_post_id=? WHERE chatId=?", (int(maxim), str(chatId))
         con.commit()
 
 
-# Запуск бота, стараемся не обращать внимания на ошибки
 if __name__ == '__main__':
     bot.polling(none_stop=True)
-
-    """
-    @bot.message_handler(content_types=['text'])
-    def handle_text(message):
-        if message.text == 'Консультация с специалистом':
-            answer = "Уважаемый пользователь! Задайте свой вопрос."
-            log(message, answer)
-            bot.send_message(message.chat.id, "Уважаемый пользователь! Задайте свой вопрос.")
-
-        if message.text == 'Вопросы к секретарю':
-            answer = "Уважаемый пользователь!Для осуществления консультации необходимо, чтобы Вы отправили номер телефона. Когда номер будет получен, задайте свой вопрос повторно."
-            log(message, answer)
-            bot.send_message(message.chat.id, "Уважаемый пользователь!Для осуществления консультации необходимо, чтобы Вы отправили номер телефона. Когда номер будет получен, задайте свой вопрос повторно.")
-
-        answer = "Просто текст"
-        log(message, answer)
-    """
