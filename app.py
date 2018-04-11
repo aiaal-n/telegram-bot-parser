@@ -127,9 +127,8 @@ def pages_parse(page, chatId):
             message.append(postContent)
     if message is not "":
         send_message(message, chatId)
-        cur.execute("UPDATE users SET last_post_id=? WHERE chatId=?", (int(maxim), chatId)
+        cur.execute("UPDATE users SET last_post_id=? WHERE chatId=?", (int(maxim), str(chatId)))
         con.commit()
-
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
